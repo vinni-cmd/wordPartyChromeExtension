@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Party</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+</head>
+
+<body>
+  <h1>Word Party</h1>
+  <img src="./images/icon-48.png" alt="word party icon">
+  <form>
+    <label for="searchWord">Word: </label>
+    <input id="searchWord" type="text" placeholder="Enter word here" required />
+    <label for="category">Category: </label>
+    <select id="category" required>
+      <option value="" disabled selected>
+        Please Select
+      </option>
+      <option value="syn">
+        Synonyms
+      </option>
+      <option value="ant">
+        Antonyms
+      </option>
+      <option value="rhy">
+        Rhymes
+      </option>
+      <option value="trg" title="Words that are strongly associated with your input"
+        aria-label="Words that are strongly associated with your input">
+        Triggers *
+      </option>
+      <option value="jja" title="Popular nouns modified by the given adjective"
+        aria-label="Popular nouns modified by the given adjective">
+        Nouns *
+      </option>
+      <option value="jjb">
+        Adjectives
+      </option>
+    </select>
+    <button title="Submit search" aria-label="Submit search">
+      Let's Party!
+    </button>
+  </form>
+  <ul class="results">
+
+  </ul>
+</body>
+
+</html>
