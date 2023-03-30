@@ -2,42 +2,51 @@ const logo = document.querySelector('#logo')
 const form = document.querySelector('form');
 const wordInput = document.querySelector('#searchWord');
 const categoryInput = document.querySelector('#category');
+const resetButton = document.querySelector('#reset')
 const searchDetails = document.querySelector('#search')
 const resultList = document.querySelector('ul');
 const url = new URL('https://api.datamuse.com/words');
 
 
+// https://dictionaryapi.dev/
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  searchDetails.textContent = "";
-  resultList.textContent = "";
+  resetResults();
   toggleLogoAnimation(true);
   const word = wordInput.value;
   const categoryCode = categoryInput.value;
-  const categoryName = e.target["1"][e.target["1"].selectedIndex].text;
-  console.log({ categoryInput })
-  getWords(word, categoryCode, categoryName);
+  getWords(word, categoryCode);
   toggleLogoAnimation(false);
 })
 
+resetButton.addEventListener('click', () => {
+  resetResults();
+})
+
 resultList.addEventListener('click', (e) => {
-  if (e.target.nodeName === 'LI') {
+  if (e.target.nodeName === 'BUTTON') {
     copyWord(e.target.textContent);
   }
 })
 
-async function getWords(word, categoryCode, categoryName) {
+function resetResults() {
+  searchDetails.textContent = "";
+  resultList.textContent = "";
+}
+
+async function getWords(word, categoryCode) {
   url.search = new URLSearchParams({
     max: 5,
-    [categoryCode]: word
+    [categoryCode]: word,
   });
   try {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
       if (data.length) {
+        console.log(data)
         setTimeout(() => {
-          searchDetails.textContent = `${word} ༼ つ ◕_◕ ༽つ ${categoryName}`;
           populateResults(data);
         }, 2000)
       } else {
@@ -47,20 +56,29 @@ async function getWords(word, categoryCode, categoryName) {
       throw new Error(`${response.statusText}. We are experiencing some technical difficulties. Please try again later.`)
     }
   } catch (error) {
+    console.log(error.message)
     setTimeout(() => {
-      searchDetails.textContent = `${word} ༼ つ ◕_◕ ༽つ ${categoryName}`;
-      populateResults([{ word: error.message }])
+      populateResults(error.message)
     }, 2000)
   }
 }
 
-function populateResults(resultsArr) {
-  resultsArr.forEach(result => {
-    const entry = document.createElement('li');
-    entry.textContent = result.word;
-    entry.setAttribute('title', 'Click to copy')
-    resultList.append(entry);
-  });
+function populateResults(results) {
+  searchDetails.textContent = `༼ つ ◕_◕ ༽つ`;
+  if (Array.isArray(results)) {
+    results.forEach(result => {
+      const entryLi = document.createElement('li');
+      const entryBtn = document.createElement('button');
+      entryBtn.setAttribute('aria-label', `click to copy '${result}' to clipboard`);
+      entryBtn.textContent = result.word;
+      entryLi.append(entryBtn);
+      resultList.append(entryLi);
+    });
+  } else {
+    const entryLi = document.createElement('li');
+    entryLi.textContent = results;
+    resultList.append(entryLi);
+  }
 }
 
 // api loading
