@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Word Party",
+  "description": "Enter a word and select a category to expand your vocabulary",
   "version": "1.0",
   "icons": {
     "16": "images/icon-16.png",
