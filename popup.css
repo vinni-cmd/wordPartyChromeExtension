@@ -28,17 +28,7 @@
   font: inherit;
 }
 
-/* dark mode user-agent-styles */
-
-html {
-  color-scheme: dark light;
-}
-
-/* responsive images/videos */
-img,
-picture,
-svg,
-video {
+img {
   display: block;
   max-width: 100%;
 }
@@ -69,6 +59,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 
 h1 {
@@ -95,6 +87,7 @@ label {
 input,
 select,
 button {
+  color: var(--primary-c);
   border-radius: 6px;
   border: 2px solid var(--primary-c);
   background-color: var(--secondary-c);
@@ -102,6 +95,7 @@ button {
   scale: 1;
   transition: var(--focus-transition);
   cursor: pointer;
+  outline: transparent;
 }
 
 input:hover,
@@ -119,7 +113,7 @@ input {
 }
 
 input::placeholder{
-  opacity: 1;
+  color: var(--primary-c);
 }
 
 button {
@@ -133,12 +127,12 @@ button > img {
 }
 
 .search {
-  font-family: var(--heading-ff);
-  text-transform: capitalize;
+  text-align: center;
 }
 
 ul {
   display: flex;
+  justify-content: center;
   gap: 0.6em;
   flex-wrap: wrap;
 }
