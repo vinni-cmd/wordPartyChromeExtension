@@ -1,0 +1,155 @@
+:root {
+  --primary-c: #23395B;
+  --secondary-c: #EAE5E9;
+  --accent-c: #78CAD2;
+  --error-c: #da2222;
+  --border-r: 6px;
+  --heading-ff: 'Josefin Sans', sans-serif;
+  --section-padding: 2em 1em;
+  --body-fs: clamp(1.7rem, 1.5vw + 1rem, 2.1rem);
+  --section-heading-fs: clamp(3rem, 6vw + 1rem, 7rem);
+  --focus-transition: all 0.3s ease-in;
+}
+
+/* makes sizing simpler */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove default spacing */
+/* force styling of type through styling, rather than elements */
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--primary-c);
+  padding: 1em;
+  background: url(./images/patrick-tomasso-Oaqk7qqNh_c-unsplash\ \(1\).png) var(--secondary-c);
+  background-blend-mode: overlay;
+  border: 2px solid var(--primary-c);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+/* header */
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+h1 {
+  font-family: var(--heading-ff);
+  font-size: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+form>*:not(label) {
+  width: 20ch;
+  height: 2rem
+}
+
+label {
+  font-family: var(--heading-ff);
+}
+
+input,
+select,
+button {
+  color: var(--primary-c);
+  border-radius: 6px;
+  border: 2px solid var(--primary-c);
+  background-color: var(--secondary-c);
+  padding: 0.1em 0.5em;
+  scale: 1;
+  transition: var(--focus-transition);
+  cursor: pointer;
+  outline: transparent;
+}
+
+input:hover,
+input:focus,
+select:hover,
+select:focus,
+button:hover,
+button:focus-visible {
+  border-color: var(--accent-c);
+  scale: 1.05;
+}
+
+input {
+  cursor: text;
+}
+
+input::placeholder{
+  color: var(--primary-c);
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button > img {
+  scale: 0.7;
+}
+
+.search {
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  gap: 0.6em;
+  flex-wrap: wrap;
+}
+
+li {
+  cursor: copy;
+}
+
+.animate {
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
