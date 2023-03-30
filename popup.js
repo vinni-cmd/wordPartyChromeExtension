@@ -7,9 +7,6 @@ const searchDetails = document.querySelector('#search')
 const resultList = document.querySelector('ul');
 const url = new URL('https://api.datamuse.com/words');
 
-
-// https://dictionaryapi.dev/
-
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   resetResults();
@@ -45,7 +42,6 @@ async function getWords(word, categoryCode) {
     if (response.ok) {
       const data = await response.json();
       if (data.length) {
-        console.log(data)
         setTimeout(() => {
           populateResults(data);
         }, 2000)
@@ -56,7 +52,6 @@ async function getWords(word, categoryCode) {
       throw new Error(`${response.statusText}. We are experiencing some technical difficulties. Please try again later.`)
     }
   } catch (error) {
-    console.log(error.message)
     setTimeout(() => {
       populateResults(error.message)
     }, 2000)
@@ -95,8 +90,9 @@ function toggleLogoAnimation(bool) {
 async function copyWord(text) {
   try {
     await navigator.clipboard.writeText(text);
-    console.log('Content copied to clipboard');
   } catch (err) {
-    console.error('Failed to copy: ', err);
+    const entryLi = document.createElement('li');
+    entryLi.textContent = 'Copy failed';
+    resultList.append(entryLi);
   }
 }
